@@ -31,12 +31,13 @@
             this.btnRecord = new System.Windows.Forms.Button();
             this.txtOut = new System.Windows.Forms.RichTextBox();
             this.btnStopRecord = new System.Windows.Forms.Button();
-            this.txtMacroName = new System.Windows.Forms.TextBox();
+            this.NewMacro = new System.Windows.Forms.Button();
+            this.macroListBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // btnRecord
             // 
-            this.btnRecord.Location = new System.Drawing.Point(451, 12);
+            this.btnRecord.Location = new System.Drawing.Point(361, 54);
             this.btnRecord.Name = "btnRecord";
             this.btnRecord.Size = new System.Drawing.Size(114, 23);
             this.btnRecord.TabIndex = 0;
@@ -46,15 +47,15 @@
             // 
             // txtOut
             // 
-            this.txtOut.Location = new System.Drawing.Point(12, 12);
+            this.txtOut.Location = new System.Drawing.Point(179, 12);
             this.txtOut.Name = "txtOut";
-            this.txtOut.Size = new System.Drawing.Size(433, 426);
+            this.txtOut.Size = new System.Drawing.Size(176, 420);
             this.txtOut.TabIndex = 1;
             this.txtOut.Text = "";
             // 
             // btnStopRecord
             // 
-            this.btnStopRecord.Location = new System.Drawing.Point(451, 41);
+            this.btnStopRecord.Location = new System.Drawing.Point(361, 83);
             this.btnStopRecord.Name = "btnStopRecord";
             this.btnStopRecord.Size = new System.Drawing.Size(114, 23);
             this.btnStopRecord.TabIndex = 2;
@@ -62,26 +63,38 @@
             this.btnStopRecord.UseVisualStyleBackColor = true;
             this.btnStopRecord.Click += new System.EventHandler(this.btnStopRecord_Click);
             // 
-            // txtMacroName
+            // NewMacro
             // 
-            this.txtMacroName.Location = new System.Drawing.Point(451, 123);
-            this.txtMacroName.Name = "txtMacroName";
-            this.txtMacroName.Size = new System.Drawing.Size(114, 20);
-            this.txtMacroName.TabIndex = 3;
+            this.NewMacro.Location = new System.Drawing.Point(361, 12);
+            this.NewMacro.Name = "NewMacro";
+            this.NewMacro.Size = new System.Drawing.Size(114, 23);
+            this.NewMacro.TabIndex = 3;
+            this.NewMacro.Text = "New Macro";
+            this.NewMacro.UseVisualStyleBackColor = true;
+            this.NewMacro.Click += new System.EventHandler(this.NewMacro_Click);
+            // 
+            // macroListBox
+            // 
+            this.macroListBox.FormattingEnabled = true;
+            this.macroListBox.Location = new System.Drawing.Point(12, 12);
+            this.macroListBox.Name = "macroListBox";
+            this.macroListBox.Size = new System.Drawing.Size(161, 420);
+            this.macroListBox.TabIndex = 4;
+            this.macroListBox.SelectedIndexChanged += new System.EventHandler(this.macroListBox_SelectedIndexChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(577, 450);
-            this.Controls.Add(this.txtMacroName);
+            this.ClientSize = new System.Drawing.Size(498, 450);
+            this.Controls.Add(this.macroListBox);
+            this.Controls.Add(this.NewMacro);
             this.Controls.Add(this.btnStopRecord);
             this.Controls.Add(this.txtOut);
             this.Controls.Add(this.btnRecord);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -90,7 +103,8 @@
         private System.Windows.Forms.Button btnRecord;
         private System.Windows.Forms.RichTextBox txtOut;
         private System.Windows.Forms.Button btnStopRecord;
-        private System.Windows.Forms.TextBox txtMacroName;
+        private System.Windows.Forms.Button NewMacro;
+        private System.Windows.Forms.ListBox macroListBox;
     }
 }
 

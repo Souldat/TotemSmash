@@ -12,13 +12,15 @@ namespace TotemSmash_{
 
     public partial class Form1 : Form{
 
+        // #stolen
         WindowsInput.InputSimulator SimKeypress = new WindowsInput.InputSimulator();
         globalKeyboardHook gkh = new globalKeyboardHook();
-        List<KeyValuePair<string, Macro>> MacroList = new List<KeyValuePair<string, Macro>>();
-        public bool record = false;
+        List<KeyValuePair<string, Macro>> MacroList = new List<KeyValuePair<string, Macro>>(); 
         Stopwatch stopwatch = new Stopwatch();
         List<Keys> AllKeys = new List<Keys> {Keys.LControlKey, Keys.LShiftKey, Keys.A, Keys.B, Keys.C, Keys.D, Keys.E, Keys.F, Keys.G, Keys.H, Keys.I, Keys.J, Keys.K, Keys.L, Keys.M, Keys.N, Keys.O, Keys.P, Keys.Q, Keys.R, Keys.S, Keys.T, Keys.U, Keys.V, Keys.W, Keys.X, Keys.Y, Keys.Z, Keys.D0, Keys.D1, Keys.D2, Keys.D3, Keys.D4, Keys.D5, Keys.D6, Keys.D7, Keys.D8, Keys.D9 };
-
+        //TODO: Really lazy way to determine our action, needs updated later
+        public int status = -1;       
+        SelectKeybind selectkeybind = new SelectKeybind();
 
         public Form1(){ 
             
@@ -39,45 +41,56 @@ namespace TotemSmash_{
 
                 txtOut.AppendText(e.KeyCode.ToString());
 
-                //If recording collect keyboard inputs and record time between inputs
-                //If not recording check out list of saved keybinds and perform any actions necessary             
-                if (record) {
+                //If status 0 creating new macro get input and save as keybind for macro
+                //If status 1 recording new macro collect keyboard inputs and record time between inputs
+                //If status 2 not recording check out list of saved keybinds and perform any actions necessary 
+                switch (status) {
 
-                    Macro macro = new Macro();
-                    MacroList.Add(new KeyValuePair<string, Macro>(txtMacroName.Text, macro));
+                    case 0:
+                        //add new macro to our macro list
+                        selectkeybind.Hide();
+                        Macro macro = new Macro();
+                        MacroList.Add(new KeyValuePair<string, Macro>(e.KeyCode.ToString(), macro));
+                        break;
 
-                    foreach(KeyValuePair<string, Macro> _macro in MacroList) {
+                    case 1:                        
 
-                        if (_macro.Value.ToString() == txtMacroName.Text) {
-
-                            _macro.Value.KeySimulation.Clear();
-                            _macro.Value.KeySimulation.Add(new KeyValuePair<long, string>(stopwatch.ElapsedMilliseconds, e.KeyCode.ToString()));
-                        }
-                    }                 
-
-                    e.Handled = true;
-                }
-                else if (!record) {
-                    
-                    try {
+                        //record macro actions
                         foreach (KeyValuePair<string, Macro> _macro in MacroList) {
 
-                            if (e.KeyCode.ToString() == _macro.Key) {                                    
+                            if (_macro.Value.ToString() == e.KeyCode.ToString()) {
 
-                                //TODO: PRESS RECORDED KEY COMBO                                        
-                                //VirtualKeyCode keyCode = VirtualKeyCode.VK_C;
-                                //SimKeypress.Keyboard.KeyPress(keyCode);
-                                    
-                            }                           
-                        }                       
-                    }
-                    catch (Exception exc) {
+                                _macro.Value.KeySimulation.Clear();
+                                _macro.Value.KeySimulation.Add(new KeyValuePair<long, string>(stopwatch.ElapsedMilliseconds, e.KeyCode.ToString()));
+                            }
+                        }
 
-                    }
+                        UpdateMacroList();
+                        e.Handled = true;
+                        break;
 
+                    case 2:
+                        //playing back macro
+                        try {
+                            foreach (KeyValuePair<string, Macro> _macro in MacroList) {
 
-                    e.Handled = true;
+                                if (e.KeyCode.ToString() == _macro.Key) {
+
+                                    //TODO: PRESS RECORDED KEY COMBO                                        
+                                    //VirtualKeyCode keyCode = VirtualKeyCode.VK_C;
+                                    //SimKeypress.Keyboard.KeyPress(keyCode);
+
+                                }
+                            }
+                        }
+                        catch (Exception exc) {
+
+                        }
+
+                        e.Handled = true;
+                        break;
                 }
+               
             }
             catch (Exception exc) { }
         } 
@@ -85,13 +98,34 @@ namespace TotemSmash_{
         private void btnRecord_Click(object sender, EventArgs e){
 
             stopwatch.Start();
-            record = true;
+            status = 1;
         }
 
         private void btnStopRecord_Click(object sender, EventArgs e){
 
             stopwatch.Stop();
-            record = false;
+            status = 3;
+        }
+
+        private void NewMacro_Click(object sender, EventArgs e) {
+
+            status = 1;           
+            selectkeybind.Show();
+        }
+
+        public void UpdateMacroList() {
+
+            macroListBox.Items.Clear();
+
+            foreach (KeyValuePair<string, Macro> _macro in MacroList) {
+                
+                macroListBox.Items.Add(_macro.Key);
+            }
+        }
+
+        private void macroListBox_SelectedIndexChanged(object sender, EventArgs e) {
+
+            //TODO: load macro actions
         }
     }
 }
