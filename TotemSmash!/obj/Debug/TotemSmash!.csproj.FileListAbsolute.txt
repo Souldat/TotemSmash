@@ -1,0 +1,14 @@
+C:\Users\weston.l.smith\Source\Repos\TotemSmash!\TotemSmash!\obj\Debug\TotemSmash_.Form1.resources
+C:\Users\weston.l.smith\Source\Repos\TotemSmash!\TotemSmash!\obj\Debug\TotemSmash_.Properties.Resources.resources
+C:\Users\weston.l.smith\Source\Repos\TotemSmash!\TotemSmash!\obj\Debug\TotemSmash!.csproj.GenerateResource.cache
+C:\Users\weston.l.smith\Source\Repos\TotemSmash!\TotemSmash!\obj\Debug\TotemSmash!.csproj.CoreCompileInputs.cache
+C:\Users\weston.l.smith\Source\Repos\TotemSmash!\TotemSmash!\bin\Debug\TotemSmash!.exe.config
+C:\Users\weston.l.smith\Source\Repos\TotemSmash!\TotemSmash!\bin\Debug\TotemSmash!.exe
+C:\Users\weston.l.smith\Source\Repos\TotemSmash!\TotemSmash!\bin\Debug\TotemSmash!.pdb
+C:\Users\weston.l.smith\Source\Repos\TotemSmash!\TotemSmash!\obj\Debug\TotemSmash!.exe
+C:\Users\weston.l.smith\Source\Repos\TotemSmash!\TotemSmash!\obj\Debug\TotemSmash!.pdb
+C:\Users\weston.l.smith\Source\Repos\TotemSmash!\TotemSmash!\obj\Debug\TotemSmash!.csprojAssemblyReference.cache
+C:\Users\weston.l.smith\Source\Repos\TotemSmash!\TotemSmash!\bin\Debug\WindowsInput.dll
+C:\Users\weston.l.smith\Source\Repos\TotemSmash!\TotemSmash!\bin\Debug\WindowsInput.xml
+C:\Users\weston.l.smith\Source\Repos\TotemSmash!\TotemSmash!\obj\Debug\TotemSmash!.csproj.CopyComplete
+C:\Users\weston.l.smith\Source\Repos\TotemSmash!\TotemSmash!\obj\Debug\TotemSmash_.SelectKeybind.resources

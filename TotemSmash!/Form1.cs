@@ -51,40 +51,49 @@ namespace TotemSmash_{
                         selectkeybind.Hide();
                         Macro macro = new Macro();
                         MacroList.Add(new KeyValuePair<string, Macro>(e.KeyCode.ToString(), macro));
+                        status = 2;
                         break;
 
-                    case 1:                        
+                    case 1:
 
-                        //record macro actions
-                        foreach (KeyValuePair<string, Macro> _macro in MacroList) {
-
-                            if (_macro.Value.ToString() == e.KeyCode.ToString()) {
-
-                                _macro.Value.KeySimulation.Clear();
-                                _macro.Value.KeySimulation.Add(new KeyValuePair<long, string>(stopwatch.ElapsedMilliseconds, e.KeyCode.ToString()));
-                            }
-                        }
-
-                        UpdateMacroList();
-                        e.Handled = true;
-                        break;
-
-                    case 2:
-                        //playing back macro
-                        try {
+                        try {                       
+                            //record macro actions
                             foreach (KeyValuePair<string, Macro> _macro in MacroList) {
 
-                                if (e.KeyCode.ToString() == _macro.Key) {
+                                if (_macro.Value.ToString() == e.KeyCode.ToString()) {
 
-                                    //TODO: PRESS RECORDED KEY COMBO                                        
-                                    //VirtualKeyCode keyCode = VirtualKeyCode.VK_C;
-                                    //SimKeypress.Keyboard.KeyPress(keyCode);
-
+                                    _macro.Value.KeySimulation.Clear();
+                                    _macro.Value.KeySimulation.Add(new KeyValuePair<long, string>(stopwatch.ElapsedMilliseconds, e.KeyCode.ToString()));
                                 }
                             }
                         }
                         catch (Exception exc) {
 
+                            MessageBox.Show(exc.ToString());
+                        }
+
+                        UpdateMacroList();
+                        e.Handled = true;
+                        status = 2;
+                        break;
+
+                    case 2:
+                        //scan key presses for bound key and playback macro if bound key is pressed
+                        try {
+
+                            //record macro actions
+                            foreach (KeyValuePair<string, Macro> _macro in MacroList) {
+
+                                if (_macro.Value.ToString() == e.KeyCode.ToString()) {
+
+                                    _macro.Value.KeySimulation.Clear();
+                                    _macro.Value.KeySimulation.Add(new KeyValuePair<long, string>(stopwatch.ElapsedMilliseconds, e.KeyCode.ToString()));
+                                }
+                            }
+                        }
+                        catch (Exception exc) {
+
+                            MessageBox.Show(exc.ToString());
                         }
 
                         e.Handled = true;
@@ -92,7 +101,10 @@ namespace TotemSmash_{
                 }
                
             }
-            catch (Exception exc) { }
+            catch (Exception exc) {
+
+                MessageBox.Show("There was an error capturing mouse / keyboard data, its possible every keypress will produce this error. Close the program to stop this." );
+            }
         } 
 
         private void btnRecord_Click(object sender, EventArgs e){
@@ -104,7 +116,8 @@ namespace TotemSmash_{
         private void btnStopRecord_Click(object sender, EventArgs e){
 
             stopwatch.Stop();
-            status = 3;
+            stopwatch.Reset();
+            status = 2;
         }
 
         private void NewMacro_Click(object sender, EventArgs e) {
