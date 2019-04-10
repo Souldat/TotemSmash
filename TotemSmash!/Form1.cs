@@ -12,7 +12,7 @@ namespace TotemSmash_{
 
     public partial class Form1 : Form{
 
-        // #stolen
+        
         WindowsInput.InputSimulator SimKeypress = new WindowsInput.InputSimulator();
         globalKeyboardHook gkh = new globalKeyboardHook();
         List<KeyValuePair<string, Macro>> MacroList = new List<KeyValuePair<string, Macro>>(); 
